@@ -1,8 +1,4 @@
-export GOVERSION=$(cat ${HOME}/.go/.goversion)
-export GOROOT=${HOME}/.go/${GOVERSION}
-export GOPATH=${HOME}/go
-export PATH=${HOME}/.go/current/bin:${GOPATH}/bin:${PATH}
-export GO111MODULE=on
+[ -r ~/.bash_private ] && source ~/.bash_private
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
@@ -22,7 +18,7 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 # i like my time in my prompt
-export PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\[\033[1;33m\][\[\033[1;37m\]\t\[\033[1;33m\]]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]" "\$ "'
+export PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\[\033[1;33m\][\[\033[1;36m\]\t\[\033[1;33m\]]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]" "\$ "'
 
 
 export HISTCONTROL=ignoreboth:erasedups
@@ -36,3 +32,4 @@ shopt -s cmdhist    # save multi line commands as one command
 # Save multi-line commands to the history with embedded newlines
 # instead of semicolons -- requries cmdhist to be on.
 shopt -s lithist
+
