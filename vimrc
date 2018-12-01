@@ -8,6 +8,7 @@ Plug 'alpaca-tc/beautify.vim'
 Plug 'ballerinalang/plugin-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 let g:neocomplete#enable_at_startup = 1
