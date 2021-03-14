@@ -1,5 +1,7 @@
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+npm install -g js-beautify
+
 git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
 git clone https://github.com/fatih/molokai ~/.vim/plugged/molokai
 git clone https://github.com/Shougo/neocomplete.vim ~/.vim/plugged/neocomplete
