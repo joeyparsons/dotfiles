@@ -33,3 +33,5 @@ shopt -s cmdhist    # save multi line commands as one command
 # instead of semicolons -- requries cmdhist to be on.
 shopt -s lithist
 
+. <(eksctl completion bash)
+
