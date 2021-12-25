@@ -16,4 +16,7 @@ git clone https://github.com/ballerina-attic/plugin-vim ~/.vim/plugged/ballerina
 git clone https://github.com/vim-airline/vim-airline ~/.vim/plugged/vim-airline
 git clone https://github.com/ekalinin/Dockerfile.vim ~/.vim/plugged/Dockerfile.vim
 git clone https://github.com/ctrlpvim/ctrlp.vim ~/.vim/plugged/ctrlp.vim
+git clone https://github.com/sonph/onehalf.git ~/.vim/plugged/onehalf
+cp -rfp ~/.vim/plugged/onehalf/vim/colors ~/.vim/
+cp -rfp ~/.vim/plugged/onehalf/vim/autoload/airline ~/.vim/autoload/
 

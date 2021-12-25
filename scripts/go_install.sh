@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 
 if [ ! -d ${GOPATH} ]; then
   mkdir ${GOPATH}
@@ -6,7 +6,7 @@ fi
 
 GOVERSION=${1}
 if [ -z "${GOVERSION}" ]; then
-  GOVERSION=1.15.7
+  GOVERSION=1.17.5
 fi
 
 if [ -d ${HOME}/.go/${GOVERSION} ]; then
