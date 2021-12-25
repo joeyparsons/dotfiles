@@ -11,6 +11,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
+Plug 'sonph/onehalf'
 
 call plug#end()
 
