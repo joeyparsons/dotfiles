@@ -19,6 +19,7 @@ brew install hyperkit
 brew install txn2/tap/kubefwd
 brew install golang-migrate
 brew install prototool
+brew install helm
 
 # set up local js dev 
 brew install npm

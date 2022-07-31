@@ -38,7 +38,7 @@ setopt AUTO_PUSHD
 setopt CORRECT
 setopt INTERACTIVE_COMMENTS
 
-export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/go/bin:/usr/local/bin:$PATH
 
 export EDITOR='vim'
 export GOPATH=${HOME}/go
@@ -49,4 +49,3 @@ source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
