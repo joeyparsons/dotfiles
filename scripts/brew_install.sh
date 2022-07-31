@@ -47,3 +47,6 @@ brew install composer
 
 brew install flyctl
 
+
+brew install romkatv/powerlevel10k/powerlevel10k
+
