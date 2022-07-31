@@ -32,3 +32,18 @@ brew install watchman
 
 # install serverless dev
 npm install -g serverless
+
+
+brew install yarn
+brew install mysql-server
+brew install mysql
+
+brew tap homebrew/cask
+brew cask install google-cloud-sdk
+
+brew install php
+brew install php-cli
+brew install composer
+
+brew install flyctl
+
