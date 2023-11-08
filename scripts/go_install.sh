@@ -6,7 +6,7 @@ fi
 
 GOVERSION=${1}
 if [ -z "${GOVERSION}" ]; then
-  GOVERSION=1.20.6
+  GOVERSION=1.21.4
 fi
 
 if [ -d ${HOME}/.go/${GOVERSION} ]; then
