@@ -11,6 +11,8 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
+Plug 'ghifarit53/tokyonight-vim'
+
 
 call plug#end()
 
@@ -30,17 +32,20 @@ let g:go_auto_type_info = 1
 
 let g:terraform_align = 1
 
-" color scheme
-" trying some onehalfdark for a bit instead of molokai
+
+set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+let g:airline_theme = "tokyonight"
+
 set t_Co=256
 set cursorline
-colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
 set bg=dark
 let g:rehash256 = 1
-let g:airline_theme='onehalfdark'
-
-" colorscheme molokai
-" let g:molokai_original = 1
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 

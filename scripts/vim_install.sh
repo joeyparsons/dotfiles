@@ -4,6 +4,7 @@ npm install -g js-beautify
 
 git clone https://github.com/fatih/vim-go.git ~/.vim/plugged/vim-go
 git clone https://github.com/fatih/molokai ~/.vim/plugged/molokai
+git clone https://github.com/ghifarit53/tokyonight-vim ~/.vim/plugged/tokyonight-vim
 git clone https://github.com/Shougo/neocomplete.vim ~/.vim/plugged/neocomplete
 git clone https://github.com/majutsushi/tagbar ~/.vim/plugged/tagbar
 git clone https://github.com/scrooloose/nerdtree ~/.vim/plugged/nerdtree
