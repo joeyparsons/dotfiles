@@ -15,11 +15,14 @@
   "buffer_font_size": 13,
 
   "preferred_line_length": 80,
-  "soft_wrap": "none",
   "tab_size": 2,
   "vim_mode": false,
-
+  "soft_wrap": "preferred_line_length",
   "format_on_save": "on",
+
+  "features": {
+    "inline_completion_provider": "supermaven"
+  },
 
   "terminal": {
     "font_family": "Fira Code",
