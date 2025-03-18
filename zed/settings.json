@@ -15,10 +15,9 @@
   "buffer_font_size": 13,
 
   "preferred_line_length": 80,
-  "soft_wrap": "none",
   "tab_size": 2,
   "vim_mode": false,
-
+  "soft_wrap": "preferred_line_length",
   "format_on_save": "on",
 
   "features": {
@@ -29,10 +28,5 @@
     "font_family": "Fira Code",
     "font_size": 12,
     "blinking": "off"
-  },
-  "git": {
-    "inline_blame": {
-      "enabled": false
-    }
   }
 }
