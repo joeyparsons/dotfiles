@@ -8,9 +8,10 @@ sudo pacman -S vulkan-radeon
 sudo pacman -S nodejs npm
 npm config set os linux
 sudo pacman -S pnpm
+yay -S zed
+yay -S kitty
 
 # ai coding
-npm install -g @anthropic-ai/claude-code
+# npm install -g @anthropic-ai/claude-code
 
-yay -S kitty
-yay -S zed
+curl -fsSL https://claude.ai/install.sh |bash
