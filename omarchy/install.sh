@@ -15,3 +15,5 @@ yay -S kitty
 # npm install -g @anthropic-ai/claude-code
 
 curl -fsSL https://claude.ai/install.sh |bash
+yay -S flyctl
+yay -S infisical-bin
