@@ -1,6 +1,9 @@
 # set up dev dirs
 mkdir ~/dev
 
+# tui monitor mgmt
+yay -S hyprmon-bin
+
 # alternate browsers
 yay -S helium-browser-bin
 
