@@ -41,8 +41,8 @@ key-mapping.preset = 'qwerty'
 
 [gaps]
 #outer.bottom numbers have to match presentation.sh variables. built-in retina display is excluded from presentation mode, so this only works on external monitors.
-outer.bottom =        [{monitor.'^built-in retina display$' = 20 }, 15]
-outer.top =        [{monitor.'^built-in retina display$' = 30 }, 15]
+outer.bottom =        [{monitor.'^built-in retina display$' = 10 }, 15]
+outer.top =        [{monitor.'^built-in retina display$' = 10 }, 15]
 outer.left =       15
 outer.right =      15
 inner.horizontal = 15
