@@ -2,6 +2,12 @@
 # AEROSPACE CONFIG
 # https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/assets/palette.png
 
+# Required macOS system settings for optimal AeroSpace performance:
+# 1. Disable separate spaces (improves multi-monitor stability):
+#    defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+# 2. Group windows by app in Mission Control:
+#    defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+# 3. Arrange monitors with free space in bottom corners for window management
 
 start-at-login = true
 
@@ -28,8 +34,8 @@ on-focus-changed = [
 #  'exec-and-forget sketchybar --trigger update_windows'
 ]
 
-enable-normalization-flatten-containers = false
-enable-normalization-opposite-orientation-for-nested-containers = false
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
 
 accordion-padding = 30
 
@@ -66,7 +72,6 @@ alt-keypadPlus = 'resize smart +70'
 alt-q = [
   'close --quit-if-last-window'
 ]
-alt-w = []
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -81,13 +86,13 @@ alt-w = []
 
 # All possible modifiers: cmd, alt, ctrl, shift
 
-alt-enter = 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/kitty.app'
+alt-enter = 'exec-and-forget open -na kitty'
 
 alt-shift-f = 'macos-native-fullscreen'
 alt-f = 'fullscreen'
 
-alt-g = 'split horizontal'
-alt-v = 'split vertical'
+alt-g = 'join-with left'
+alt-v = 'join-with down'
 
 alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
 alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
