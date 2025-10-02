@@ -1,0 +1,160 @@
+#!/bin/bash
+
+# ===== SKETCHYBAR CONFIGURATION =====
+# Simple, clean configuration inspired by agenttank's setup
+# https://felixkratz.github.io/SketchyBar/config/bar
+
+# ===== BAR APPEARANCE =====
+# Configure the overall look and positioning of the bar
+
+bar=(
+  # Position: top or bottom
+  position=top
+
+  # Height: Height of the bar in pixels (default: 25)
+  height=32
+
+  # Color: Bar background color in ARGB hex format (0xAARRGGBB)
+  # 0x44 = alpha (transparency), rest is RGB color
+  color=0x44000000
+
+  # Blur: Background blur radius for translucent effect (default: 0)
+  blur_radius=30
+
+  # Padding: Space between bar edges and items (default: 0)
+  padding_left=10
+  padding_right=10
+
+  # Margin: Space around the entire bar (default: 0)
+  margin=0
+
+  # Corner radius: Rounded corners in pixels (default: 0)
+  corner_radius=9
+
+  # Border: Bar border styling (default: 0)
+  border_width=0
+
+  # Y-offset: Vertical positioning adjustment (default: 0)
+  y_offset=0
+
+  # Sticky: Keep bar visible across all spaces (default: on)
+  sticky=on
+
+  # Topmost: Draw bar above all windows (default: off)
+  # Options: off, on, window (only above windows, not fullscreen apps)
+  # Note: On macOS Sequoia 15+, use "on" to cover the native menu bar
+  topmost=on
+
+  # Font smoothing: Enable/disable font antialiasing (default: off)
+  font_smoothing=on
+
+  # Shadow: Enable bar drop shadow (default: off)
+  shadow=off
+
+  # Display: Which display(s) to show bar on (default: all)
+  # Options: main, all, or list of display numbers
+  display=all
+)
+
+sketchybar --bar "${bar[@]}"
+
+# ===== DEFAULT ITEM STYLES =====
+# Set default styling for all items (can be overridden per-item)
+
+defaults=(
+  # Updates: Controls when items update (default: on)
+  # Options: on, off, when_shown
+  updates=when_shown
+
+  # Icon settings
+  icon.font="Hack Nerd Font:Bold:12.0"
+  icon.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+
+  # Label settings
+  label.font="Hack Nerd Font:Bold:11.0"
+  label.color=0xffffffff
+  label.padding_left=4
+  label.padding_right=4
+
+  # Background settings for items
+  background.padding_left=4
+  background.padding_right=4
+)
+
+sketchybar --default "${defaults[@]}"
+
+# ===== ADD CUSTOM EVENT FOR AEROSPACE =====
+# Create a custom event that AeroSpace will trigger on workspace changes
+sketchybar --add event aerospace_workspace_change
+
+# ===== WORKSPACE INDICATORS (1-10) =====
+# Create clickable workspace indicators that highlight the active workspace
+
+for sid in $(seq 1 10); do
+  sketchybar --add item space.$sid left \
+    --subscribe space.$sid aerospace_workspace_change \
+    --set space.$sid \
+      icon="$sid" \
+      icon.padding_left=8 \
+      icon.padding_right=8 \
+      icon.highlight_color=0xffFFBE69 \
+      label.drawing=off \
+      background.color=0x44ffffff \
+      background.corner_radius=5 \
+      background.height=20 \
+      background.drawing=off \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid" \
+      click_script="aerospace workspace $sid"
+done
+
+# ===== FRONT APP =====
+# Display the currently focused application name
+
+sketchybar --add item front_app left \
+  --set front_app \
+    script="$CONFIG_DIR/plugins/front_app.sh" \
+    icon.drawing=off \
+    label.font="Hack Nerd Font:Bold:12.0" \
+    label.padding_left=10 \
+  --subscribe front_app front_app_switched
+
+# ===== CLOCK =====
+# Simple clock showing time and date
+
+sketchybar --add item clock right \
+  --set clock \
+    update_freq=10 \
+    icon= \
+    script="$CONFIG_DIR/plugins/clock.sh"
+
+# ===== BATTERY =====
+# Battery percentage and charging status
+
+sketchybar --add item battery right \
+  --set battery \
+    update_freq=30 \
+    script="$CONFIG_DIR/plugins/battery.sh" \
+  --subscribe battery power_source_change
+
+# ===== VOLUME =====
+# System volume indicator
+
+sketchybar --add item volume right \
+  --set volume \
+    script="$CONFIG_DIR/plugins/volume.sh" \
+  --subscribe volume volume_change
+
+# ===== WIFI =====
+# WiFi connection status
+
+sketchybar --add item wifi right \
+  --set wifi \
+    update_freq=30 \
+    script="$CONFIG_DIR/plugins/wifi.sh" \
+  --subscribe wifi wifi_change
+
+# ===== FINALIZE =====
+# Force all scripts to run to populate initial values
+sketchybar --update

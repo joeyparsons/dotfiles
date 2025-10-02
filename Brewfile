@@ -93,6 +93,8 @@ cask "ngrok"
 cask "visual-studio-code"
 cask "vlc"
 cask "nikitabobko/tap/aerospace"
+cask "font-hack-nerd-font"
+cask "sf-symbols"
 
 vscode "aeschli.vscode-css-formatter"
 vscode "bmewburn.vscode-intelephense-client"

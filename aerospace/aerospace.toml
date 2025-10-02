@@ -1,116 +1,188 @@
-# heavily inspired by https://github.com/agenttank/dotfiles_macos/tree/main/aerospace
-# AEROSPACE CONFIG
-# https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/assets/palette.png
+# ===== AEROSPACE CONFIGURATION =====
+# Tiling window manager for macOS inspired by i3/sway
+# Heavily inspired by: https://github.com/agenttank/dotfiles_macos/tree/main/aerospace
+# Documentation: https://nikitabobko.github.io/AeroSpace/guide
+# Color scheme: https://github.com/edunfelt/base16-rose-pine-scheme/blob/main/assets/palette.png
 
-# Required macOS system settings for optimal AeroSpace performance:
+# ===== REQUIRED macOS SYSTEM SETTINGS =====
+# For optimal AeroSpace performance, run these commands once:
+#
 # 1. Disable separate spaces (improves multi-monitor stability):
 #    defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+#
 # 2. Group windows by app in Mission Control:
 #    defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+#
 # 3. Arrange monitors with free space in bottom corners for window management
+#    (Check in System Settings > Displays > Arrange)
 
+# ===== STARTUP BEHAVIOR =====
+
+# Start AeroSpace automatically when you log in
 start-at-login = true
 
+# Commands to run after login (empty for now)
 after-login-command = []
 
+# Commands to run when AeroSpace starts
+# - borders: Visual indicator for active window (orange) and inactive windows (teal)
+# - sketchybar: Custom status bar with workspace indicators
 after-startup-command = [
-     'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xFFFFBE69 inactive_color=0xFF007692 width=8.0'
-#     'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar'
+     'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xFFFFBE69 inactive_color=0xFF007692 width=8.0',
+     'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar'
 ]
 
-#exec-on-workspace-change = [
-#  '/bin/bash',
-#  '-c',
-#  'sketchybar --trigger aerospace_workspace_changed FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
-#]
+# Notify SketchyBar when switching workspaces
+# Passes the focused workspace number to update the workspace indicators
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
 
+# Move mouse to center of monitor when switching monitors
 on-focused-monitor-changed = [
   'move-mouse monitor-lazy-center'
 ]
 
+# Move mouse to center of window when switching focus
 on-focus-changed = [
   'move-mouse window-lazy-center'
-#  'exec-and-forget /bin/bash -c /opt/homebrew/bin/sketchybar --trigger front_app_switched',
-#  'exec-and-forget sketchybar --trigger update_windows'
+  # Optional: Update SketchyBar when switching apps
+  # 'exec-and-forget /bin/bash -c /opt/homebrew/bin/sketchybar --trigger front_app_switched',
+  # 'exec-and-forget sketchybar --trigger update_windows'
 ]
 
+# ===== LAYOUT & WINDOW BEHAVIOR =====
+
+# Normalization: Automatically clean up window tree structure
+# - flatten-containers: Remove single-child containers (recommended: true)
+# - opposite-orientation: Ensure nested containers alternate orientation (recommended: true)
+# Keep these enabled unless you're an advanced user who wants manual control
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+# Accordion padding: Space around nested container labels (in pixels)
 accordion-padding = 30
 
+# Default layout for new workspaces
+# Options: tiles (tiling), accordion (nested containers), floating
 default-root-container-layout = 'tiles'
 
+# Default split orientation for new containers
+# Options: auto (horizontal for wide, vertical for tall), horizontal, vertical
 default-root-container-orientation = 'auto'
 
+# Keyboard layout preset
+# Options: qwerty, dvorak, colemak
 key-mapping.preset = 'qwerty'
 
+# ===== GAPS & SPACING =====
+# Space between windows and screen edges (in pixels)
+
 [gaps]
-#outer.bottom numbers have to match presentation.sh variables. built-in retina display is excluded from presentation mode, so this only works on external monitors.
+# Note: Built-in Retina display gets smaller top/bottom gaps
+# External monitors get 15px gaps on all sides
 outer.bottom =        [{monitor.'^built-in retina display$' = 10 }, 15]
 outer.top =        [{monitor.'^built-in retina display$' = 10 }, 15]
 outer.left =       15
 outer.right =      15
+
+# Space between windows
 inner.horizontal = 15
 inner.vertical =   15
 
-[exec]                   # Again, you don't need to copy all config sections to your config.
-inherit-env-vars = true  # If you don't touch "exec" section,
-[exec.env-vars]          # it will fallback to "default-config.toml"
+# ===== ENVIRONMENT VARIABLES =====
+# Variables available to commands executed by AeroSpace
+
+[exec]
+# Inherit environment variables from parent process
+inherit-env-vars = true
+
+[exec.env-vars]
+# Add Homebrew binaries to PATH
 PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
+# ===== KEYBINDINGS =====
+# All keybindings use Alt (⌥) as the main modifier
+# Alt+Shift for moving windows/workspaces
+
 [mode.main.binding]
+
+# ----- Layout Management -----
+
+# Alt+Space: Toggle between floating and tiling layout
 alt-space = 'layout floating tiling'
+
+# Alt+R: Enter resize mode (use h/j/k/l to resize, Esc to exit)
 alt-r = [
   'mode resize'
-#  'exec-and-forget sketchybar --trigger send_message MESSAGE="RESIZE MODE" HOLD="true"'
+  # Optional: Show resize mode indicator in SketchyBar
+  # 'exec-and-forget sketchybar --trigger send_message MESSAGE="RESIZE MODE" HOLD="true"'
 ]
 
+# Quick resize shortcuts (requires numpad)
+# Alt+Keypad-: Shrink window by 70px
+# Alt+Keypad+: Grow window by 70px
 alt-keypadMinus = 'resize smart -70'
 alt-keypadPlus = 'resize smart +70'
 
+# ----- Window Management -----
+
+# Alt+Q: Close focused window (quit app if last window)
 alt-q = [
   'close --quit-if-last-window'
 ]
 
-# All possible keys:
-# - Letters.        a, b, c, ..., z
-# - Numbers.        0, 1, 2, ..., 9
-# - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
-# - F-keys.         f1, f2, ..., f20
-# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
-#                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
-# - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
-#                   keypadMinus, keypadMultiply, keypadPlus
-# - Arrows.         left, down, up, right
-
-# All possible modifiers: cmd, alt, ctrl, shift
-
+# Alt+Enter: Open new kitty terminal window
 alt-enter = 'exec-and-forget open -na kitty'
 
+# Fullscreen modes
+# Alt+Shift+F: macOS native fullscreen (separate space)
+# Alt+F: AeroSpace fullscreen (within current workspace)
 alt-shift-f = 'macos-native-fullscreen'
 alt-f = 'fullscreen'
 
+# Container manipulation
+# Alt+G: Join window with the one to its left (horizontal grouping)
+# Alt+V: Join window with the one below it (vertical grouping)
 alt-g = 'join-with left'
 alt-v = 'join-with down'
 
+# ----- Focus Movement -----
+# Move focus between windows (vim-style hjkl or arrow keys)
+# Boundaries: Stop at monitor edges, allowing cross-monitor navigation
+
+# Vim keys
 alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
 alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
 alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
 alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
+
+# Arrow keys
 alt-left = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
 alt-down = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
 alt-up = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
 alt-right = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
 
+# ----- Window Movement -----
+# Move windows within/between workspaces (vim-style or arrow keys)
+
+# Vim keys
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
+
+# Arrow keys
 alt-shift-left = 'move left'
 alt-shift-down = 'move down'
 alt-shift-up = 'move up'
 alt-shift-right = 'move right'
+
+# ----- Workspace Navigation -----
+# Switch to workspaces 1-10
+# --auto-back-and-forth: Pressing the same workspace number twice returns to previous workspace
 
 alt-1 = 'workspace --auto-back-and-forth 1'  # coding + terminal
 alt-2 = 'workspace --auto-back-and-forth 2'  # coding
@@ -123,6 +195,9 @@ alt-8 = 'workspace --auto-back-and-forth 8'  # n/a
 alt-9 = 'workspace --auto-back-and-forth 9'  # n/a
 alt-0 = 'workspace --auto-back-and-forth 10' # browsing
 
+# ----- Move Windows to Workspaces -----
+# Move focused window to workspace 1-10 (stays on current workspace)
+
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
@@ -134,26 +209,44 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
 
+# ----- Multi-Monitor Management -----
+
+# Alt+Tab: Toggle between current and previous workspace
 alt-tab = 'workspace-back-and-forth'
+
+# Alt+P: Move entire workspace to next monitor (wraps around)
 alt-p = 'move-workspace-to-monitor --wrap-around next'
+
+# Alt+Shift+P: Move focused window to next monitor and follow it
 alt-shift-p = [
   'move-node-to-monitor --wrap-around next',
-  'focus-monitor next --wrap-around' 
+  'focus-monitor next --wrap-around'
 ]
 
-# https://nikitabobko.github.io/AeroSpace/goodies#popular-apps-ids
+# ===== AUTOMATIC WINDOW PLACEMENT =====
+# Automatically move specific apps to designated workspaces
+# App IDs reference: https://nikitabobko.github.io/AeroSpace/goodies#popular-apps-ids
+
+# Superhuman (email) → Workspace 4
 [[on-window-detected]]
 if.app-id = 'com.superhuman.mail'
 run = ['move-node-to-workspace 4']
 
+# Slack → Workspace 5 (force tiling layout)
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['layout tiling', 'move-node-to-workspace 5']
 
+# 1Password → Workspace 6
 [[on-window-detected]]
-if.app-id = 'com.1password.1password' 
-run = ['move-node-to-workspace 6']  
+if.app-id = 'com.1password.1password'
+run = ['move-node-to-workspace 6']
 
+# Discord → Workspace 9
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = ['move-node-to-workspace 9']
+
+# ===== RESIZE MODE =====
+# Enter with Alt+R, exit with Esc
+# Not yet configured - press Esc to return to main mode
