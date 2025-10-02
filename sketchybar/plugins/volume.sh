@@ -42,4 +42,5 @@ fi
 sketchybar --set "$NAME" \
   icon="$ICON" \
   icon.color="$COLOR" \
-  label="${VOLUME}%"
+  label="${VOLUME}%" \
+  click_script="open x-apple.systempreferences:com.apple.Sound-Settings.extension"

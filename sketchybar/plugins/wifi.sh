@@ -46,4 +46,5 @@ fi
 sketchybar --set "$NAME" \
   icon="$ICON" \
   icon.color="$COLOR" \
-  label="$LABEL"
+  label="$LABEL" \
+  click_script="open x-apple.systempreferences:com.apple.Network-Settings.extension"

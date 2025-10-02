@@ -11,25 +11,25 @@ bar=(
   # Position: top or bottom
   position=top
 
-  # Height: Height of the bar in pixels (default: 25)
-  height=32
+  # Height: Taller bar for better visibility (default: 25)
+  height=40
 
   # Color: Bar background color in ARGB hex format (0xAARRGGBB)
-  # 0x44 = alpha (transparency), rest is RGB color
-  color=0x44000000
+  # Slightly more opaque for better contrast
+  color=0x66000000
 
   # Blur: Background blur radius for translucent effect (default: 0)
   blur_radius=30
 
   # Padding: Space between bar edges and items (default: 0)
-  padding_left=10
-  padding_right=10
+  padding_left=12
+  padding_right=12
 
   # Margin: Space around the entire bar (default: 0)
   margin=0
 
   # Corner radius: Rounded corners in pixels (default: 0)
-  corner_radius=9
+  corner_radius=0
 
   # Border: Bar border styling (default: 0)
   border_width=0
@@ -100,14 +100,25 @@ for sid in $(seq 1 10); do
       icon.padding_left=8 \
       icon.padding_right=8 \
       icon.highlight_color=0xffFFBE69 \
+      icon.font="Hack Nerd Font:Bold:13.0" \
       label.drawing=off \
-      background.color=0x44ffffff \
-      background.corner_radius=5 \
-      background.height=20 \
+      background.color=0x33ffffff \
+      background.corner_radius=6 \
+      background.height=26 \
       background.drawing=off \
+      background.padding_left=2 \
+      background.padding_right=2 \
       script="$CONFIG_DIR/plugins/aerospace.sh $sid" \
       click_script="aerospace workspace $sid"
 done
+
+# Add bracket around all workspace indicators for grouped styling
+sketchybar --add bracket spaces '/space\..*/' \
+  --set spaces background.color=0x22ffffff \
+    background.corner_radius=8 \
+    background.height=30 \
+    background.padding_left=4 \
+    background.padding_right=4
 
 # ===== FRONT APP =====
 # Display the currently focused application name
@@ -120,40 +131,127 @@ sketchybar --add item front_app left \
     label.padding_left=10 \
   --subscribe front_app front_app_switched
 
-# ===== CLOCK =====
-# Simple clock showing time and date
+# Spacer
+sketchybar --add item spacer.left left \
+  --set spacer.left width=12
 
+# ===== POMODORO TIMER =====
+# Interactive focus timer - click to start/stop
+
+sketchybar --add item pomodoro left \
+  --set pomodoro \
+    update_freq=1 \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
+    background.color=0x22ffffff \
+    background.corner_radius=8 \
+    background.height=30 \
+    background.padding_left=4 \
+    background.padding_right=4 \
+    script="$CONFIG_DIR/plugins/pomodoro.sh" \
+    click_script="$CONFIG_DIR/plugins/pomodoro.sh" \
+  --subscribe pomodoro mouse.clicked
+
+# ===== RIGHT SIDE ITEMS =====
+# Note: Items are added right-to-left, so we add clock first to place it at the far right
+
+# Clock (far right) - hover to show UTC time
 sketchybar --add item clock right \
   --set clock \
     update_freq=10 \
     icon= \
-    script="$CONFIG_DIR/plugins/clock.sh"
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
+    background.color=0x22ffffff \
+    background.corner_radius=8 \
+    background.height=30 \
+    background.padding_left=4 \
+    background.padding_right=4 \
+    script="$CONFIG_DIR/plugins/clock.sh" \
+  --subscribe clock mouse.entered mouse.exited \
+  --add item clock.popup popup.clock \
+  --set clock.popup \
+    background.color=0xee1e1e2e \
+    background.corner_radius=8 \
+    background.padding_left=8 \
+    background.padding_right=8 \
+    label.padding_left=4 \
+    label.padding_right=4 \
+    icon.drawing=off
 
-# ===== BATTERY =====
-# Battery percentage and charging status
+# Spacer
+sketchybar --add item spacer.3 right \
+  --set spacer.3 width=8
 
+# ===== WEATHER =====
+# Current weather (Fahrenheit) - click to refresh, hover for Celsius
+
+sketchybar --add item weather right \
+  --set weather \
+    update_freq=1800 \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
+    background.color=0x22ffffff \
+    background.corner_radius=8 \
+    background.height=30 \
+    background.padding_left=4 \
+    background.padding_right=4 \
+    script="$CONFIG_DIR/plugins/weather.sh" \
+    click_script="$CONFIG_DIR/plugins/weather.sh" \
+  --subscribe weather mouse.clicked mouse.entered mouse.exited \
+  --add item weather.popup popup.weather \
+  --set weather.popup \
+    background.color=0xee1e1e2e \
+    background.corner_radius=8 \
+    background.padding_left=8 \
+    background.padding_right=8 \
+    label.padding_left=4 \
+    label.padding_right=4 \
+    icon.drawing=off
+
+# Spacer
+sketchybar --add item spacer.2 right \
+  --set spacer.2 width=8
+
+# Network & connectivity group
 sketchybar --add item battery right \
   --set battery \
     update_freq=30 \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
     script="$CONFIG_DIR/plugins/battery.sh" \
   --subscribe battery power_source_change
 
-# ===== VOLUME =====
-# System volume indicator
-
 sketchybar --add item volume right \
   --set volume \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
     script="$CONFIG_DIR/plugins/volume.sh" \
   --subscribe volume volume_change
-
-# ===== WIFI =====
-# WiFi connection status
 
 sketchybar --add item wifi right \
   --set wifi \
     update_freq=30 \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    label.padding_right=8 \
     script="$CONFIG_DIR/plugins/wifi.sh" \
   --subscribe wifi wifi_change
+
+# Add bracket around connectivity items
+sketchybar --add bracket connectivity wifi volume battery \
+  --set connectivity background.color=0x22ffffff \
+    background.corner_radius=8 \
+    background.height=30
+
+# Spacer for visual separation from left side
+sketchybar --add item spacer.1 right \
+  --set spacer.1 width=12
 
 # ===== FINALIZE =====
 # Force all scripts to run to populate initial values
