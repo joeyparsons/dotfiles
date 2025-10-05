@@ -95,6 +95,7 @@ cask "vlc"
 cask "nikitabobko/tap/aerospace"
 cask "font-hack-nerd-font"
 cask "sf-symbols"
+cask "helium-browser"
 
 vscode "aeschli.vscode-css-formatter"
 vscode "bmewburn.vscode-intelephense-client"
