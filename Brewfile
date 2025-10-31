@@ -96,6 +96,7 @@ cask "font-fira-code"
 cask "sf-symbols"
 cask "helium-browser"
 cask "kitty"
+cask "zed"
 
 vscode "aeschli.vscode-css-formatter"
 vscode "bmewburn.vscode-intelephense-client"
