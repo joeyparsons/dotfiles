@@ -237,10 +237,20 @@ run = ['move-node-to-workspace 4']
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['layout tiling', 'move-node-to-workspace 5']
 
-# 1Password → Workspace 6
+# 1Password → Workspace 10
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = ['move-node-to-workspace 10']
+
+# Helium Browser - Workspace 10
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+run = ['move-node-to-workspace 10']
+
+# Messages → Workspace 7
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = ['move-node-to-workspace 7']
 
 # Discord → Workspace 9
 [[on-window-detected]]

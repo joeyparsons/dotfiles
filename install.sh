@@ -13,9 +13,11 @@ cp p10k.zsh ~/.p10k.zsh
 mkdir -p ~/.config/kitty/
 mkdir -p ~/.config/direnv/
 mkdir -p ~/.config/zed/
+mkdir -p ~/.config/aerospace/
 cp kitty/* ~/.config/kitty/
 cp direnv/* ~/.config/direnv/
 cp zed/* ~/.config/zed/
+cp aerospace/* ~/.config/aerospace/
 
 # set up vim
 bash scripts/vim_install.sh
