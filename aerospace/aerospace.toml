@@ -189,7 +189,7 @@ alt-2 = 'workspace --auto-back-and-forth 2'  # coding
 alt-3 = 'workspace --auto-back-and-forth 3'  # database + github
 alt-4 = 'workspace --auto-back-and-forth 4'  # superhuman
 alt-5 = 'workspace --auto-back-and-forth 5'  # slack
-alt-6 = 'workspace --auto-back-and-forth 6'  # 1password
+alt-6 = 'workspace --auto-back-and-forth 6'  # 
 alt-7 = 'workspace --auto-back-and-forth 7'  # n/a
 alt-8 = 'workspace --auto-back-and-forth 8'  # n/a
 alt-9 = 'workspace --auto-back-and-forth 9'  # n/a
@@ -240,7 +240,7 @@ run = ['layout tiling', 'move-node-to-workspace 5']
 # 1Password → Workspace 6
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
-run = ['move-node-to-workspace 6']
+run = ['move-node-to-workspace 10']
 
 # Discord → Workspace 9
 [[on-window-detected]]
