@@ -97,6 +97,7 @@ cask "sf-symbols"
 cask "helium-browser"
 cask "kitty"
 cask "zed"
+cask "discord"
 
 vscode "aeschli.vscode-css-formatter"
 vscode "bmewburn.vscode-intelephense-client"
