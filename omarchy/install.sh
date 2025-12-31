@@ -21,13 +21,14 @@ yay -S zed
 # preferred terminal du jour
 yay -S kitty
 
-# ai coding
-curl -fsSL https://claude.ai/install.sh |bash
 
 # dev tooling
 yay -S flyctl
 yay -S infisical-bin
 curl -fsSL https://bun.sh/install | bash
+
+yay -S claude-code
+yay -S opencode
 
 
 source ~/.bash_profile
