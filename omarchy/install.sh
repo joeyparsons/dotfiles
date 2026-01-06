@@ -11,6 +11,9 @@ yay -S helium-browser-bin
 sudo pacman -S nodejs npm
 npm config set os linux
 sudo pacman -S pnpm
+pnpm setup
+source ~/.bashrc
+pnpm add turbo --global
 
 # needed for zed editor
 sudo pacman -S vulkan-radeon
@@ -29,6 +32,8 @@ curl -fsSL https://bun.sh/install | bash
 
 yay -S claude-code
 yay -S opencode
+
+
 
 
 source ~/.bash_profile
