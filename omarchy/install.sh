@@ -29,6 +29,8 @@ yay -S kitty
 yay -S flyctl
 yay -S infisical-bin
 curl -fsSL https://bun.sh/install | bash
+yay -S pulumi
+yay -S google-cloud-cli
 
 yay -S claude-code
 yay -S opencode
