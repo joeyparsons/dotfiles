@@ -1,6 +1,9 @@
 # set up dev dirs
 mkdir ~/dev
 
+# systools
+yay -S bind-tools
+
 # tui monitor mgmt
 yay -S hyprmon-bin
 
