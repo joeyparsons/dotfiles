@@ -38,6 +38,7 @@ yay -S google-cloud-cli
 yay -S claude-code
 yay -S opencode
 
+yay -S mysql-clients84
 
 
 
