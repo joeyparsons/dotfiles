@@ -6,6 +6,8 @@ yay -S bind-tools
 
 # tui monitor mgmt
 yay -S hyprmon-bin
+# brightness util
+yay -S ddcutil
 
 # alternate browsers
 yay -S helium-browser-bin
