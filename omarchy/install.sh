@@ -1,7 +1,8 @@
 # set up dev dirs
 mkdir ~/dev
 
-# systools
+# dosfstools
+sudo pacman -S dosfstools
 yay -S bind-tools
 
 # tui monitor mgmt
@@ -28,7 +29,6 @@ yay -S zed
 
 # preferred terminal du jour
 yay -S kitty
-
 
 # dev tooling
 yay -S flyctl
